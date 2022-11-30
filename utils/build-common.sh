@@ -37,7 +37,7 @@ build_apisix_base_deb() {
     fi
     DEBIAN_FRONTEND=noninteractive apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get install -y sudo git libreadline-dev lsb-release libssl-dev perl build-essential
-    DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends wget gnupg ca-certificates
+    DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends wget curl gnupg ca-certificates
     wget -O - https://openresty.org/package/pubkey.gpg | apt-key add -
 
     if [[ $IMAGE_BASE == "ubuntu" ]]; then

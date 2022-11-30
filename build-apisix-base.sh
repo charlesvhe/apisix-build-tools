@@ -101,6 +101,7 @@ cd ../..
 
 cd wasm-nginx-module-${wasm_nginx_module_ver} || exit 1
 ./install-wasmtime.sh
+./install-wasmedge.sh
 cd ..
 
 cc_opt=${cc_opt:-}
@@ -114,7 +115,7 @@ grpc_engine_path="-DNGX_GRPC_CLI_ENGINE_PATH=$OR_PREFIX/libgrpc_engine.so -DNGX_
 cd openresty-${or_ver} || exit 1
 ./configure --prefix="$OR_PREFIX" \
     --with-cc-opt="-DAPISIX_BASE_VER=$version $grpc_engine_path $cc_opt" \
-    --with-ld-opt="-Wl,-rpath,$OR_PREFIX/wasmtime-c-api/lib $ld_opt" \
+    --with-ld-opt="-Wl,-rpath,$OR_PREFIX/wasmtime-c-api/lib -Wl,-rpath,$OR_PREFIX/wasmedge/lib $ld_opt" \
     $debug_args \
     --add-module=../mod_dubbo-${mod_dubbo_ver} \
     --add-module=../ngx_multi_upstream_module-${ngx_multi_upstream_module_ver} \
